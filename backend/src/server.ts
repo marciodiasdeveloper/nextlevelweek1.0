@@ -2,10 +2,19 @@ import express from 'express';
 
 const app = express();
 
-app.get('/users', (request, response) => {
-    console.log('Listagem de usuários');
+const users = [
+    'Diego',
+    'Márcio',
+    'Robson',
+    'Daniel',
+];
 
-    response.json({ message: 'Hello World'});
+app.get('/users', (request, response) => {
+    const search = request.query.search;
+
+    const filteredUsers = search ? users.filter(user => user.includes(search)) : users;
+
+    return response.json(users);
 });
 
 app.listen(3333);
