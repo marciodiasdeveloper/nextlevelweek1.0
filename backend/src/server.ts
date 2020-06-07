@@ -1,20 +1,9 @@
 import express from 'express';
+import routes from './routes';
 
 const app = express();
 
-const users = [
-    'Diego',
-    'Márcio',
-    'Robson',
-    'Daniel',
-];
-
-app.get('/users', (request, response) => {
-    const search = request.query.search;
-
-    const filteredUsers = search ? users.filter(user => user.includes(search)) : users;
-
-    return response.json(users);
-});
+app.use(express.json());
+app.use(routes);
 
 app.listen(3333);
